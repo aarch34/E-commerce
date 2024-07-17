@@ -1,0 +1,4 @@
+Django Admin
+username:admin
+Email address: test@admin.com
+Password: 123456
