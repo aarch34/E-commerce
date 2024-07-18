@@ -146,11 +146,27 @@ header.sticky{
     color:red;
 }
 .productss{
-    display:grid;
-    grid-template-columns: repeat(auto-fit,minmax(260px,auto));
-    gap:2rem;
+    display:flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Adjust as needed for spacing between rows */
 }
+
+
+
+
+.productss-image {
+    max-height: 300px;  
+    width: 300px;       
+    object-fit: cover;
+}
+
+
+
 .row{
+    flex: 1 1 calc(33.333% - 20px); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position:relative;
     transition:all .40s;
 }
@@ -158,13 +174,15 @@ header.sticky{
     width:100%;
     height:auto;
     transition:all .40s;
-}
+} 
 .row img:hover{
     transform:scale(0.9);
 
 }
 
-
+.price, .ratting, .heart-icon, .productss-text {
+    text-align: center;
+}
 
 .productss-text h5{
     position:absolute;
