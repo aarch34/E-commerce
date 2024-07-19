@@ -25,10 +25,14 @@
                 <li><a href="#Contact-Us">Contact Us</a></li>
             </ul>
             <div class="nav-icon"> 
-                <a href="#"><i class='bx bx-search'></i></a>
-                <a href="{% url 'signup' %}"><i class='bx bxs-user'></i></a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'profile' %}"><i class='bx bxs-user'></i></a>
+                    <a href="{% url 'logout' %}"><i class='bx bx-log-out'></i></a>
+                {% else %}
+                    <a href="{% url 'signup' %}"><i class='bx bxs-user'></i></a>
+                    <a href="{% url 'login' %}"><i class='bx bx-log-in'></i></a>
+                {% endif %}
                 <a href="#"><i class='bx bx-cart'></i></a>
-                <div class="bx bx-menu" id="menu-icon"></div>
             </div>
         </header>
         <main>
@@ -36,7 +40,7 @@
                 <div class="main-text">
                     <h1>Winter Sale!</h1>
                     <p>Get all your favourite collections!!</p>
-                    <a href="# " class="main-btn">Shop now<i class='bx bx-right-arrow-alt'></i></a>
+                    <a href="{% url 'product_list' %}" class="main-btn">Shop now<i class='bx bx-right-arrow-alt'></i></a>
                 </div>
                 <div class="down-arrow">
                     <a href="#Products" class="down"><i class='bx bx-down-arrow-alt'></i></a>

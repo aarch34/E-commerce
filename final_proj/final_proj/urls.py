@@ -17,12 +17,23 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from ui.views import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', landing_page, name='landing_page'),
     path('admin/', admin.site.urls),
     path('signup/', signup_view, name='signup'),
     path('login/', login_view, name='login'),
-    path('home/', home, name='home')
-]
-
+    path('logout/', logout_view, name='logout'),
+    path('home/', home, name='home'),
+    path('profile/', profile_view, name='profile'),
+    path('products/', product_list, name='product_list'),
+    path('products/add/', add_product, name='add_product'),
+    path('products/<int:pk>/', product_detail, name='product_detail'),
+    path('products/<int:pk>/edit/', edit_product, name='edit_product'),
+    path('products/<int:pk>/delete/', delete_product, name='delete_product'),
+    path('products/<int:pk>/add_review/', add_review, name='add_review'),
+    path('reviews/<int:pk>/edit/', edit_review, name='edit_review'),
+    path('reviews/<int:pk>/delete/', delete_review, name='delete_review'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
