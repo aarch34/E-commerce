@@ -1,12 +1,12 @@
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import SignUpForm
+from .forms import SignUpForm, ProductForm, ReviewForm
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
+import random
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .models import Product, Review
-from .forms import ProductForm, ReviewForm
+from .models import Product, Review, Product, Cart, CartItem
 
 
 def landing_page(request):
@@ -151,3 +151,60 @@ def delete_review(request, pk):
         review.delete()
         return redirect('product_detail', pk=product_pk)
     return render(request, 'delete_review.html', {'review': review})
+
+
+@login_required
+def add_to_cart(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    cart, created = Cart.objects.get_or_create(user=request.user)
+    cart_item, created = CartItem.objects.get_or_create(
+        cart=cart, product=product)
+    if not created:
+        cart_item.quantity += 1
+    cart_item.save()
+    return redirect('cart_view')
+
+
+@login_required
+def cart_view(request):
+    cart = get_object_or_404(Cart, user=request.user)
+    return render(request, 'cart.html', {'cart': cart})
+
+
+@login_required
+def remove_from_cart(request, item_id):
+    cart_item = get_object_or_404(
+        CartItem, id=item_id, cart__user=request.user)
+    cart_item.delete()
+    return redirect('cart_view')
+
+
+@login_required
+def update_cart_item_quantity(request, item_id, action):
+    cart_item = get_object_or_404(
+        CartItem, id=item_id, cart__user=request.user)
+    if action == 'increase':
+        cart_item.quantity += 1
+    elif action == 'decrease' and cart_item.quantity > 1:
+        cart_item.quantity -= 1
+    cart_item.save()
+    return redirect('cart_view')
+
+
+@login_required
+def checkout(request):
+    cart = get_object_or_404(Cart, user=request.user)
+    total_price = cart.get_total_price()
+    print("total price", total_price)
+    discount_percent = (random.randint(0, 60))
+    print("discount percent", discount_percent)
+    discount_amount = (float(total_price) * (discount_percent / 100))
+    print("discount amount", discount_amount)
+    final_price = float(total_price) - discount_amount
+    print("final price", final_price)
+    return render(request, 'checkout.html', {
+        'total_price': total_price,
+        'discount_percent': discount_percent,
+        'discount_amount': discount_amount,
+        'final_price': final_price
+    })

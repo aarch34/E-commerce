@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #35424a;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #35424a;
+        }
+        ul {
+            padding: 0;
+        }
+        li {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+        li img {
+            margin-right: 20px;
+            border-radius: 5px;
+        }
+        li p {
+            margin: 0 10px;
+        }
+        a {
+            color: #e74c3c;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #35424a;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        .quantity-buttons {
+            display: flex;
+            align-items: center;
+        }
+        .quantity-buttons button {
+            margin: 0 5px;
+            background-color: #35424a;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .quantity-buttons button:hover {
+            background-color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Your Cart</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'landing_page' %}">Home</a></li>
+                <li><a href="{% url 'product_list' %}">Products</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Your Cart</h2>
+        {% if cart.items.exists %}
+        <ul>
+            {% for item in cart.items.all %}
+            <li>
+                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" width="100">
+                <p>{{ item.product.name }}</p>
+                <div class="quantity-buttons">
+                    <a href="{% url 'update_cart_item_quantity' item.id 'decrease' %}"><button>-</button></a>
+                    <p>Quantity: {{ item.quantity }}</p>
+                    <a href="{% url 'update_cart_item_quantity' item.id 'increase' %}"><button>+</button></a>
+                </div>
+                <p>Price: ${{ item.product.price }}</p>
+                <p>Total: ${{ item.get_total_price }}</p>
+                <a href="{% url 'remove_from_cart' item.id %}">Remove</a>
+            </li>
+            {% endfor %}
+        </ul>
+        <p>Total: ${{ cart.get_total_price }}</p>
+        <a href="{% url 'checkout' %}" class="main-btn">Proceed to Checkout</a>
+        {% else %}
+        <p>Your cart is empty</p>
+        {% endif %}
+    </main>
+    <footer>
+        <p>&copy; 2024 Your Store</p>
+    </footer>
+</body>
+</html>

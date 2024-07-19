@@ -100,6 +100,7 @@
         <h2>{{ product.name }}</h2>
         <p>{{ product.description }}</p>
         <p>Price: ${{ product.price }}</p>
+        <p><a href="{% url 'add_to_cart' product.id %}">Add to Cart</a></p>
         <img src="{{ product.image.url }}" alt="{{ product.name }}">
         <hr>
         <h3>Reviews</h3>
@@ -108,6 +109,9 @@
                 <p>Rating: {{ review.rating }}</p>
                 <p>{{ review.comment }}</p>
                 <p>By: {{ review.user.username }} on {{ review.created_at }}</p>
+                {% if review.updated_at %}
+                    <p>Updated on {{ review.updated_at }}</p>
+                {% endif %}
                 {% if review.user == user %}
                     <a href="{% url 'edit_review' review.pk %}">Edit</a>
                     <a href="{% url 'delete_review' review.pk %}">Delete</a>

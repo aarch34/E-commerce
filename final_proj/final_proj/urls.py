@@ -36,4 +36,11 @@ urlpatterns = [
     path('products/<int:pk>/add_review/', add_review, name='add_review'),
     path('reviews/<int:pk>/edit/', edit_review, name='edit_review'),
     path('reviews/<int:pk>/delete/', delete_review, name='delete_review'),
+    path('cart/add/<int:product_id>/', add_to_cart, name='add_to_cart'),
+    path('cart/', cart_view, name='cart_view'),
+    path('cart/remove/<int:item_id>/',
+         remove_from_cart, name='remove_from_cart'),
+    path('cart/update/<int:item_id>/<str:action>/',
+         update_cart_item_quantity, name='update_cart_item_quantity'),
+    path('checkout/', checkout, name='checkout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

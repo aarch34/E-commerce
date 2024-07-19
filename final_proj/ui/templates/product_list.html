@@ -117,6 +117,7 @@
                         <a href="{% url 'edit_product' product.pk %}">Edit</a>
                         <a href="{% url 'delete_product' product.pk %}">Delete</a>
                     {% endif %}
+                    <a href="{% url 'add_to_cart' product.id %}">Add to Cart</a
                 </li>
             {% endfor %}
         </ul>
