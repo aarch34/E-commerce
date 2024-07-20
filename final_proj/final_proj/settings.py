@@ -77,12 +77,12 @@ WSGI_APPLICATION = 'final_proj.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ecom',
-        'USER': 'postgres',
-        'PASSWORD': '1475963',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dbms_proj',
+        'USER': 'root',
+        'PASSWORD': 'aArcha@888', 
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '3306',
     }
 }
 

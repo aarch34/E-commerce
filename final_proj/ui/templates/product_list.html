@@ -8,82 +8,128 @@
     <style>
         /* General Styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
         }
-        
+
         /* Header Styles */
         header {
-            background-color: #333;
-            color: #fff;
+            background-color: #ffccf2;
+            color: #333;
             padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
-        
+
         header h1 {
             margin: 0;
+            font-size: 2.5em;
+            text-align: center;
         }
-        
+
         nav ul {
             list-style-type: none;
             padding: 0;
-            margin: 0;
+            margin: 10px 0;
+            text-align: center;
         }
-        
+
         nav li {
             display: inline;
             margin-right: 20px;
         }
-        
+
         nav a {
-            color: #fff;
+            color: #333;
             text-decoration: none;
-            padding: 10px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            background-color: #ffe6f2;
             transition: background-color 0.3s ease;
+            font-weight: bold;
         }
-        
+
         nav a:hover {
-            background-color: #555;
+            background-color: #ffb3d1;
         }
-        
+
         /* Main Content Styles */
         main {
             padding: 20px;
         }
-        
+
         ul {
             list-style-type: none;
             padding: 0;
             margin: 0;
-        }
-        
-        li {
-            background-color: #f5f5f5;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 20px;
-            margin-bottom: 20px;
             display: flex;
-            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
         }
-        
-        li a {
-            color: #333;
-            text-decoration: none;
-            flex-grow: 1;
+
+        li {
+            background-color: #fff0f5;
+            border: 1px solid #ffd1dc;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px;
+            width: 300px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
         }
-        
-        li h2 {
-            margin-top: 0;
+
+        li:hover {
+            transform: scale(1.05);
         }
-        
-        li p {
+
+        li img {
+            max-width: 100%;
+            border-radius: 8px;
             margin-bottom: 10px;
         }
-        
-        li img {
-            max-width: 100px;
-            margin-right: 20px;
+
+        li h2 {
+            margin: 0;
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        li p {
+            margin: 10px 0;
+            color: #555;
+        }
+
+        /* Product Link Styles */
+        li a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #ffd1dc;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .button:hover {
+            background-color: #ffb3b3;
+        }
+
+        .admin-links {
+            margin-top: 10px;
+        }
+
+        .admin-links a {
+            margin-right: 10px;
+            font-size: 0.9em;
+            color: #ff99cc;
         }
     </style>
 </head>
@@ -96,7 +142,7 @@
                 <li><a href="{% url 'product_list' %}">Products</a></li>
                 <li><a href="{% url 'logout' %}">Logout</a></li>
                 {% if user.is_staff %}
-                <li><a href="{% url 'add_product' %}">Add product</a></li>
+                <li><a href="{% url 'add_product' %}">Add Product</a></li>
                 {% endif %}
             </ul>
         </nav>
@@ -113,11 +159,13 @@
                         <p>{{ product.description }}</p>
                         <p>Price: ${{ product.price }}</p>
                     </a>
-                    {% if user.is_staff %}
-                        <a href="{% url 'edit_product' product.pk %}">Edit</a>
-                        <a href="{% url 'delete_product' product.pk %}">Delete</a>
-                    {% endif %}
-                    <a href="{% url 'add_to_cart' product.id %}">Add to Cart</a
+                    <div class="admin-links">
+                        {% if user.is_staff %}
+                            <a href="{% url 'edit_product' product.pk %}" class="button">Edit</a>
+                            <a href="{% url 'delete_product' product.pk %}" class="button">Delete</a>
+                        {% endif %}
+                        <a href="{% url 'add_to_cart' product.id %}" class="button">Add to Cart</a>
+                    </div>
                 </li>
             {% endfor %}
         </ul>

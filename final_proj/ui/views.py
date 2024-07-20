@@ -195,13 +195,9 @@ def update_cart_item_quantity(request, item_id, action):
 def checkout(request):
     cart = get_object_or_404(Cart, user=request.user)
     total_price = cart.get_total_price()
-    print("total price", total_price)
     discount_percent = (random.randint(0, 60))
-    print("discount percent", discount_percent)
     discount_amount = (float(total_price) * (discount_percent / 100))
-    print("discount amount", discount_amount)
     final_price = float(total_price) - discount_amount
-    print("final price", final_price)
     return render(request, 'checkout.html', {
         'total_price': total_price,
         'discount_percent': discount_percent,
