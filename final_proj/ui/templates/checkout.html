@@ -9,51 +9,74 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #fafafa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         header {
-            background-color: #35424a;
+            background-color: #ff69b4;
             color: white;
-            padding: 10px 0;
+            padding: 15px 0;
             text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         nav ul {
             list-style-type: none;
             padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
         }
         nav ul li {
-            display: inline;
             margin: 0 15px;
         }
         nav ul li a {
             color: white;
             text-decoration: none;
             font-weight: bold;
+            transition: color 0.3s;
         }
         nav ul li a:hover {
-            text-decoration: underline;
+            color: #ffc0cb;
         }
         main {
             max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
+            margin: 40px auto;
+            padding: 30px;
             background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
         }
         h2 {
-            color: #35424a;
+            color: #ff69b4;
+            margin-bottom: 20px;
         }
         p {
             font-size: 1.2em;
+            color: #333;
         }
         footer {
             text-align: center;
             padding: 20px;
-            background-color: #35424a;
+            background-color: #ff69b4;
             color: white;
-            position: relative;
+            position: absolute;
             bottom: 0;
             width: 100%;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        }
+        @media (max-width: 600px) {
+            header, footer {
+                padding: 10px 0;
+            }
+            nav ul li {
+                margin: 0 10px;
+            }
+            main {
+                padding: 20px;
+            }
         }
     </style>
 </head>
@@ -74,7 +97,7 @@
         <p>We hope to see you again soon!</p>
     </main>
     <footer>
-        <p>&copy; 2024 Your Store</p>
+        <p>&copy; 2024 Maganta&Gallo</p>
     </footer>
 </body>
 </html>

@@ -12,7 +12,7 @@
             background-color: #f4f4f4;
         }
         header {
-            background-color: #35424a;
+            background-color: #663263;
             color: white;
             padding: 10px 0;
             text-align: center;
@@ -69,7 +69,7 @@
         footer {
             text-align: center;
             padding: 20px;
-            background-color: #35424a;
+            background-color: #663263;
             color: white;
             position: relative;
             bottom: 0;
@@ -81,7 +81,7 @@
         }
         .quantity-buttons button {
             margin: 0 5px;
-            background-color: #35424a;
+            background-color: #663263;
             color: white;
             border: none;
             padding: 5px 10px;
@@ -125,11 +125,11 @@
         <p>Total: ${{ cart.get_total_price }}</p>
         <a href="{% url 'checkout' %}" class="main-btn">Proceed to Checkout</a>
         {% else %}
-        <p>Your cart is empty</p>
+        <p>Your cart is empty :(</p>
         {% endif %}
     </main>
     <footer>
-        <p>&copy; 2024 Your Store</p>
+        <p>&copy; 2024 Maganta&Gallo</p>
     </footer>
 </body>
 </html>

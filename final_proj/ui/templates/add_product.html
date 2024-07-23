@@ -8,46 +8,75 @@
     <style>
         /* General Styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f9f9f9;
         }
         
         /* Header Styles */
         header {
-            background-color: #333;
+            background-color: #e17ddc;
             color: #fff;
             padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
         }
         
         header h1 {
             margin: 0;
+            font-size: 24px;
+            text-align: center;
         }
         
         nav ul {
-            list-style-type: none;
+            list-style: none;
             padding: 0;
-            margin: 0;
+            margin: 10px 0 0;
+            display: flex;
+            justify-content: center;
         }
         
         nav li {
-            display: inline;
-            margin-right: 20px;
+            margin: 0 15px;
         }
         
         nav a {
             color: #fff;
             text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: #e74c3c;
         }
         
         /* Main Content Styles */
         main {
-            padding: 20px;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
         }
         
         form {
-            max-width: 500px;
-            margin: 0 auto;
+            max-width: 600px;
+            width: 100%;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        form h2 {
+            margin-top: 0;
+            font-size: 22px;
+            color: #333;
+            text-align: center;
         }
         
         form p {
@@ -59,25 +88,36 @@
         form label {
             font-weight: bold;
             margin-bottom: 5px;
+            color: #555;
         }
         
         form input, form textarea {
-            padding: 10px;
+            padding: 12px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            margin-top: 5px;
+            background-color: #f9f9f9;
+        }
+        
+        form input[type="file"] {
+            border: none;
         }
         
         button[type="submit"] {
-            background-color: #333;
+            background-color: #d975dc;
             color: #fff;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 20px;
             border-radius: 4px;
             cursor: pointer;
+            font-size: 16px;
+            display: block;
+            width: 100%;
+            transition: background-color 0.3s ease;
         }
         
         button[type="submit"]:hover {
-            background-color: #555;
+            background-color: #d5ade0;
         }
     </style>
 </head>
@@ -95,6 +135,7 @@
     <main>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
+            <h2>Add New Product</h2>
             {{ form.as_p }}
             <button type="submit">Add Product</button>
         </form>
