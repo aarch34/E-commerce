@@ -138,7 +138,11 @@ def edit_review(request, pk):
             return redirect('product_detail', pk=review.product.pk)
     else:
         form = ReviewForm(instance=review)
-    return render(request, 'edit_review.html', {'form': form})
+    context = {
+        'form': form,
+        'username': request.user.username,  # Pass the username to the template
+    }
+    return render(request, 'edit_review.html',  context)
 
 
 @login_required

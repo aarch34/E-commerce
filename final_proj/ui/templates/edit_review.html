@@ -11,23 +11,27 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #fce4ec; /* Light pink background */
         }
         
         /* Header Styles */
         header {
-            background-color: #333;
+            background-color: #f48fb1; /* Light pink for the header */
             color: #fff;
             padding: 20px;
+            text-align: center;
+            border-bottom: 4px solid #c2185b; /* Darker pink for the border */
         }
         
         header h1 {
             margin: 0;
+            font-size: 24px;
         }
         
         nav ul {
             list-style-type: none;
             padding: 0;
-            margin: 0;
+            margin: 20px 0 0;
         }
         
         nav li {
@@ -38,28 +42,40 @@
         nav a {
             color: #fff;
             text-decoration: none;
-            padding: 10px;
-            transition: background-color 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
         nav a:hover {
-            background-color: #555;
+            background-color: #c2185b; /* Darker pink for hover effect */
+            color: #fff;
+        }
+        
+        .username {
+            font-size: 18px;
+            font-weight: bold;
+            color: #c2185b; /* Highlight color for the username */
+            margin-top: 10px;
         }
         
         /* Main Content Styles */
         main {
-            padding: 200px;
+            padding: 40px 20px;
             display: flex;
             justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 150px); /* Adjust for header height */
         }
         
         form {
             max-width: 500px;
             width: 100%;
-            background-color: #f5f5f5;
+            background-color: #fff;
             border: 1px solid #ddd;
-            border-radius: 4px;
+            border-radius: 8px;
             padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
         form p {
@@ -74,22 +90,24 @@
         }
         
         form input, form textarea {
-            padding: 10px;
+            padding: 12px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            margin-bottom: 10px;
         }
         
         button[type="submit"] {
-            background-color: #333;
+            background-color: #f48fb1; /* Light pink for the button */
             color: #fff;
             border: none;
-            padding: 10px 20px;
+            padding: 12px;
             border-radius: 4px;
             cursor: pointer;
+            font-size: 16px;
         }
         
         button[type="submit"]:hover {
-            background-color: #555;
+            background-color: #c2185b; /* Darker pink for hover effect */
         }
     </style>
 </head>
@@ -103,6 +121,7 @@
                 <li><a href="{% url 'logout' %}">Logout</a></li>
             </ul>
         </nav>
+        <p class="username">Editing as: {{ username }}</p>
     </header>
     <main>
         <form method="post">
